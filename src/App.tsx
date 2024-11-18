@@ -32,7 +32,7 @@ function App() {
             </Popover.Anchor>
             <Popover.Content>
               <div className="content">
-                <span>Hello</span>
+                <p>Hello</p>
                 <button type="button">Just here chillin</button>
               </div>
             </Popover.Content>

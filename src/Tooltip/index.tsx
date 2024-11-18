@@ -203,7 +203,6 @@ const PopoverAnchor: React.FC<{
     ...children.props,
     popovertarget: id,
     onClick: toggle,
-    "aria-controls": id,
     "aria-describedby": id,
     "aria-expanded": isOpen,
     onKeyDown: handleAnchorKeyDown,
@@ -220,6 +219,11 @@ const PopoverCloseButton = () => {
       className="close-btn"
       aria-label="close"
       onClick={close}
+      style={{
+        position: "absolute",
+        top: "10px",
+        right: "10px",
+      }}
     >
       X
     </button>
@@ -235,28 +239,25 @@ const PopoverContent: React.FC<React.PropsWithChildren> = ({ children }) => {
     floatingStyles,
   } = usePopover();
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <div
       ref={setContentReference}
-      role="tooltip"
+      role="dialog"
       id={id}
-      aria-hidden={!isOpen}
       popover="manual"
       onKeyDown={handleContentKeyDown}
       style={{
         border: "none",
         margin: 0,
         position: "absolute",
-        display: isOpen ? "block" : "none",
+        display: isOpen ? "flex" : "none",
+        flexDirection: "column-reverse",
+        paddingTop: "45px",
         ...floatingStyles,
       }}
     >
+      <div>{children}</div>
       <PopoverCloseButton />
-      {children}
     </div>
   );
 };
